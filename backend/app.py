@@ -1,5 +1,5 @@
 from spotify_service import get_access_token, get_now_playing, REFRESH_TOKEN
-from cloudflare_worker import Response
+from workers import Response
 
 async def on_request(request, env, ctx):
     if request.method == "GET" and request.path == "/now-playing":
