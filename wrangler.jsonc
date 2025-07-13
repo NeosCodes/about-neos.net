@@ -6,12 +6,16 @@
     ],
     "compatibility_date": "2025-07-13",
     "vars": {
-        "API_Host": "about-neos.net"
+        "API_Host": "about-neos.net",
+        "SPOTIFY_CLIENT_ID": "32220806a0c54b1e8f3df531da1c826a",
+        "CLIENT_SECRET": "08d28abc66844315bb101796d1004e70"
     },
     "env": {
         "dev": {
             "vars": {
-                "API_Host": "dev.about-neos.net"
+                "API_Host": "dev.about-neos.net",
+                "CLIENT_ID": "32220806a0c54b1e8f3df531da1c826a",
+                "CLIENT_SECRET": "08d28abc66844315bb101796d1004e70"
             }
         }
     }
