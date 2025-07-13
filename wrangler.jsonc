@@ -1,0 +1,18 @@
+{
+    "name": "about-neos",
+    "main": "backend/app.py",
+    "compatibility_flags": [
+        "python_workers"
+    ],
+    "compatibility_date": "2025-07-13",
+    "vars": {
+        "API_Host": "about-neos.net"
+    },
+    "env": {
+        "dev": {
+            "vars": {
+                "API_Host": "dev.about-neos.net"
+            }
+        }
+    }
+}
