@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Neos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="/backend/conn.js"></script>
+  <style>
+    body {
+      font-family: 'Monospace', monospace;
+      background-image: url("images/home-screen.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-300 text-black min-h-screen px-4 py-10">
+
+    <div x-data="{ flipped: false }" @click="flipped = !flipped" class="w-40 h-40 mx-auto mb-10 perspective cursor-pointer">
+        <div :class="{ 'rotate-y-180': flipped }" class="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d rounded-full border-4 border-gray-600 shadow-lg">
+
+            <div class="absolute inset-0 backface-hidden rounded-full overflow-hidden">
+            <img src="images/pfp/discord.jpg" alt="Bild 1" class="object-cover w-full h-full" />
+            </div>
+
+            <div class="absolute inset-0 backface-hidden rounded-full overflow-hidden transform rotate-y-180">
+            <img src="images/pfp/smoking.png" alt="Bild 2" class="object-cover w-full h-full" />
+            </div>
+
+        </div>
+    </div>
+    <style>
+    .perspective {
+        perspective: 1000px;
+    }
+    .transform-style-preserve-3d {
+        transform-style: preserve-3d;
+    }
+    .rotate-y-180 {
+        transform: rotateY(180deg);
+    }
+    .backface-hidden {
+        backface-visibility: hidden;
+    }
+    </style>
+
+    <!-- Karten -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    <!-- Beispielkarte mit Click Toggle -->
+    <div id="spotify-card" x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
+        <div class="absolute inset-0 bg-white/70 pointer-events-none"></div>
+        <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+            <h2 class="text-center font-bold">Spotify</h2>
+        </div>
+        <div x-show="open" x-transition class="pt-4 flex flex-col items-center justify-center h-full relative z-10">
+            <img src="images/icons/spotify_icon.svg.png" class="w-10 h-10 mb-2" alt="Spotify" />
+            <div class="text-center">
+                <p class="font-bold text-green-600">Aktueller Song:</p>
+                <p class="text-gray-800">Titel: <span id="spotify-title">---</span></p>
+                <p class="text-gray-800">Künstler: <span id="spotify-artist">---</span></p>
+                <p class="text-gray-800"><span id="spotify-progress"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weitere Karten (nur Struktur, du kannst Inhalte anpassen) -->
+    <div x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
+        <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+            <h2 class="text-center font-bold">Neos im Moment</h2>
+        </div>
+        <div x-show="open" x-transition class="pt-4 h-full flex items-center justify-center">
+            <div 
+            x-data="{
+                images: [
+                'images/slides/neos1.png',
+                'images/slides/neos2.png',
+                'images/slides/neos3.png',
+                'images/slides/neos4.png',
+                ],
+                idx: 0,
+                prev() { this.idx = (this.idx === 0) ? this.images.length - 1 : this.idx - 1 },
+                next() { this.idx = (this.idx === this.images.length - 1) ? 0 : this.idx + 1 }
+            }"
+            class="relative w-full h-50 flex items-center justify-center"
+            @click.stop
+            >
+                <button @click="prev" class="absolute left-0 z-10 bg-white/80 hover:bg-white rounded-full px-2 py-1 text-xl font-bold shadow" style="top: 50%; transform: translateY(-50%);">&#8592;</button>
+                <img :src="images[idx]" alt="Slideshow" class="object-contain h-36 mx-auto rounded shadow" />
+                <button @click="next" class="absolute right-0 z-10 bg-white/80 hover:bg-white rounded-full px-2 py-1 text-xl font-bold shadow" style="top: 50%; transform: translateY(-50%);">&#8594;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Karte 3 -->
+    <div x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
+      <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+        <h2 class="text-center font-bold">Spendemöglichkeiten <br>TW: Blut</h2>
+      </div>
+      <div x-show="open" x-transition class="pt-4">
+        <p class="text-gray-700">
+            <div class="mb-4 w-full flex justify-center">
+            <span class="text-center text-gray-700 italic">Dein Beitrag für die Gesellschaft?</span>
+            </div>
+            <ul class="flex flex-col items-center justify-center space-y-2 w-full">
+                <li class="flex items-center justify-center w-full">
+                    <a href="https://www.haema.de/blutspende/" target="_blank">Blutspende</a>
+                </li>
+                <li class="flex items-center justify-center w-full">
+                    <a href="https://www.haema.de/plasmaspende/" target="_blank">Plasmaspende</a>
+                </li>
+                <li class="flex items-center justify-center w-full">
+                    <a href="https://www.dkms.de/" target="_blank">Stammzellenspende</a>
+                </li>
+            </ul>
+        </p>
+      </div>
+    </div>
+
+    <!-- Karte 4 -->
+    <div x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
+      <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+        <h2 class="text-center font-bold"></h2>
+      </div>
+      <div x-show="open" x-transition class="pt-4">
+        <p class="text-gray-700"></p>
+      </div>
+    </div>
+
+    <!-- Karte 5 -->
+    <div x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
+        <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
+            <h2 class="text-center font-bold">Tätowierter Neos</h2>
+        </div>
+        <div x-show="open" x-transition class="pt-4 h-full flex flex-col items-center justify-center">
+            <div 
+                x-data="{
+                    images: [
+                        'images/tatts/tattoo_1.png',
+                        'images/tatts/tattoo_2.png',
+                        'images/tatts/tattoo_3.png'
+                    ],
+                    idx: 0,
+                    prev() { this.idx = (this.idx === 0) ? this.images.length - 1 : this.idx - 1 },
+                    next() { this.idx = (this.idx === this.images.length - 1) ? 0 : this.idx + 1 }
+                }"
+                class="relative w-full h-50 flex items-center justify-center"
+                @click.stop
+            >
+                <button @click="prev" class="absolute left-0 z-10 bg-white/80 hover:bg-white rounded-full px-2 py-1 text-xl font-bold shadow" style="top: 50%; transform: translateY(-50%);">&#8592;</button>
+                <img :src="images[idx]" alt="Slideshow" class="object-contain h-36 mx-auto rounded shadow" />
+                <button @click="next" class="absolute right-0 z-10 bg-white/80 hover:bg-white rounded-full px-2 py-1 text-xl font-bold shadow" style="top: 50%; transform: translateY(-50%);">&#8594;</button>
+            </div>
+            <span class="mt-2 text-xxs text-zinc-700 italic font-semibold tracking-wide">credits to @zori_ttt</span>
+        </div>
+    </div>
+
+    <!-- Karte 6 -->
+    <div class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden flex flex-col items-center justify-center transition-all duration-300">
+        <p>----- Links -----</p>
+        <ul class="flex flex-col items-center space-y-2 w-full">
+            <li class="flex items-center justify-center w-full">
+                <img src="images/icons/github_icon.svg.png" class="w-5 h-5 mr-2" alt="GitHub" />
+                <a href="https://github.com/NeosCodes" target="_blank">GitHub</a>
+            </li>
+            <li class="flex items-center justify-center w-full">
+                <img src="images/icons/pinterest_icon.png" class="w-5 h-5 mr-2" alt="Pinterest" />
+                <a href="https://de.pinterest.com/neos_aest/" target="_blank">Pinterest</a>
+            </li>
+            <li class="flex items-center justify-center w-full">
+                <img src="images/icons/steam_icon.svg.png" class="w-5 h-5 mr-2" alt="Steam" />
+                <a href="https://steamcommunity.com/id/Neos_san/" target="_blank">Steam</a>
+            </li>
+            <li class="flex items-center justify-center w-full">
+                <img src="images/icons/spotify_icon.svg.png" class="w-5 h-5 mr-2" alt="Spotify" />
+                <a href="https://open.spotify.com/user/215qzbmrohjuamqe6ue6cs7na?si=2654faba4b114c5f" target="_blank">Spotify</a>
+            </li>
+        </ul>
+    </div>
+
+  </div>
+</body>
+</html>
