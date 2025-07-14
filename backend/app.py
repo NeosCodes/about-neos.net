@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from spotify_service import get_access_token, get_now_playing, REFRESH_TOKEN
+from backend.spotify_service import get_access_token, get_now_playing, REFRESH_TOKEN
 
 app = Flask(__name__)
 
