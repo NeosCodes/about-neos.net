@@ -50,7 +50,7 @@
     <!-- Karten -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 
-    <!-- Beispielkarte mit Click Toggle -->
+    <!-- Karte 1 -->
     <div id="spotify-card" x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
         <div class="absolute inset-0 bg-white/70 pointer-events-none"></div>
         <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
@@ -67,7 +67,7 @@
         </div>
     </div>
 
-    <!-- Weitere Karten (nur Struktur, du kannst Inhalte anpassen) -->
+    <!-- Karte 2 -->
     <div x-data="{ open: false }" @click="open = !open" class="relative bg-white border border-gray-500 shadow-[inset_-2px_-2px_0px_0px_#d1d5db] h-64 p-4 overflow-hidden cursor-pointer transition-all duration-300">
         <div x-show="!open" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center">
             <h2 class="text-center font-bold">Neos im Moment</h2>

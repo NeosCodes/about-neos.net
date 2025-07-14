@@ -1,11 +1,11 @@
-from flask import Flask, jsonify
-from backend.spotify_service import get_access_token, get_now_playing, REFRESH_TOKEN
+from flask import Flask, jsonify, send_from_directory
+from spotify_service import get_access_token, get_now_playing, REFRESH_TOKEN
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="index.html")
 
 @app.route("/", methods=["GET"])
 def index():
-    return "Now Playing"
+    return send_from_directory("static", "index.html")
 
 @app.route("/now-playing", methods=["GET"])
 def now_playing():
