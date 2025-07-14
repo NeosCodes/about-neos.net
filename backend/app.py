@@ -3,6 +3,10 @@ from backend.spotify_service import get_access_token, get_now_playing, REFRESH_T
 
 app = Flask(__name__)
 
+@app.route("/", methods=["GET"])
+def index():
+    return "Now Playing"
+
 @app.route("/now-playing", methods=["GET"])
 def now_playing():
     try:
